@@ -4,7 +4,7 @@ import * as pty from "@homebridge/node-pty-prebuilt-multiarch";
 import { LimitQueue } from "./utils/limit-queue";
 import { DockgeSocket } from "./util-server";
 import {
-    allowedCommandList, allowedRawKeys,
+    allowedRawKeys,
     PROGRESS_TERMINAL_ROWS,
     TERMINAL_COLS,
     TERMINAL_ROWS
@@ -266,7 +266,7 @@ export class InteractiveTerminal extends Terminal {
 }
 
 /**
- * User interactive terminal that use bash or powershell with limited commands such as docker, ls, cd, dir
+ * User interactive terminal that use bash or powershell
  */
 export class MainTerminal extends InteractiveTerminal {
     constructor(server : DockgeServer, name : string) {
@@ -296,10 +296,6 @@ export class MainTerminal extends InteractiveTerminal {
         const executable = cmdParts[0].trim();
         log.debug("console", "Executable: " + executable);
         log.debug("console", "Executable length: " + executable.length);
-
-        if (!allowedCommandList.includes(executable)) {
-            throw new Error("Command not allowed.");
-        }
         super.write(input);
     }
 }

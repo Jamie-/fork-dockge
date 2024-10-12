@@ -3,18 +3,6 @@
         <div>
             <h1 class="mb-3">Console</h1>
 
-            <div>
-                <p>
-                    {{ $t("Allowed commands:") }}
-                    <template v-for="(command, index) in allowedCommandList" :key="command">
-                        <code>{{ command }}</code>
-
-                        <!-- No comma at the end -->
-                        <span v-if="index !== allowedCommandList.length - 1">, </span>
-                    </template>
-                </p>
-            </div>
-
             <Terminal class="terminal" :rows="20" mode="mainTerminal" name="console" :endpoint="endpoint"></Terminal>
         </div>
     </transition>
@@ -22,16 +10,10 @@
 
 <script>
 
-import { allowedCommandList } from "../../../common/util-common";
-
 export default {
     components: {
     },
-    data() {
-        return {
-            allowedCommandList,
-        };
-    },
+    data() { },
     computed: {
         endpoint() {
             return this.$route.params.endpoint || "";
